@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="view-highscores">
+        <h5>View Highscores</h5>
+    </div>
+    <div class="card-1">
+        <div class="quiz-opening">
+            <h2 id="quiz-title">Quiz Name</h2>
+            <h3 id="quiz-instructions">You have 180 seconds to complete the quiz.<br>
+            If you get an answer wrong, 10 seconds will be removed from the countdown</h3>
+        </div>
+        <div id="start-button">
+            <button>Start Quiz</button>
+        </div>
+    </div>
+    <div class="card-2">
+        <div id="timer-text">Time left: <span id="countdown"></span></div>
+        <div id="question">Question</div>
+        <div class="answers">
+            <button id="answer1">Answer</button>
+            <button id="answer2">Answer</button>
+            <button id="answer3">Answer</button>
+            <button id="answer4">Answer</button>
+        </div>
+    </div>
+    <div class="card-3">
+        <div id="thanks-msg">Thanks for taking my quiz!<br>Submit your intials to save your score:</div>
+        <div class="highscore-submit">
+            <textarea></textarea>
+            <button>Submit Score</button>
+        </div>
+    </div>
+    <div class="card-4">
+        <div class="highscores">
+            <ul>Highscores</ul>
+                <li></li>
+                <li></li>
+                <li></li>
+        </div>
+        <div class="final-buttons">
+            <button>Play Again</button>
+            <button>Clear Highscores</button>
+        </div>
+    </div>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>

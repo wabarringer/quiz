@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+}
+
+/* .card-1 {
+   display: none;
+} */
+
+.card-2 {
+    display: none;
+}
+
+.card-3 {
+    display: none;
+}
+
+.card-4 {
+    display: none;
+}
+
+.quiz-opening {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.answers {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}
+
+#start-button {
+    display: flex;
+    justify-content: center;
+}
+
