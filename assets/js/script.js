@@ -9,6 +9,56 @@ var answerButton3 = document.querySelector("#answer3")
 var answerButton4 = document.querySelector("#answer4")
 var answers = document.querySelector(".answers")
 var message = document.querySelector("#message")
+var playerScore = 0
+var scoreDisplayed = document.querySelector("#player-score")
+
+// created question objects to call from
+var question1 = {
+    question: "Placeholder question 1",
+    answerOption: {
+        a1: "Placeholder Option 1",
+        a2: "Placeholder Option 2",
+        a3: "Placeholder Option 3",
+        a4: "Placeholder Option 4"
+    }
+}
+var question2 = {
+    question: "Placeholder question 2",
+    answerOption: {
+        a1: "Placeholder Option 1",
+        a2: "Placeholder Option 2",
+        a3: "Placeholder Option 3",
+        a4: "Placeholder Option 4"
+    }
+}
+var question3 = {
+    question: "Placeholder question 3",
+    answerOption: {
+        a1: "Placeholder Option 1",
+        a2: "Placeholder Option 2",
+        a3: "Placeholder Option 3",
+        a4: "Placeholder Option 4"
+    }
+}
+var question4 = {
+    question: "Placeholder question 4",
+    answerOption: {
+        a1: "Placeholder Option 1",
+        a2: "Placeholder Option 2",
+        a3: "Placeholder Option 3",
+        a4: "Placeholder Option 4"
+    }
+}
+var question5 = {
+    question: "Placeholder question 5",
+    answerOption: {
+        a1: "Placeholder Option 1",
+        a2: "Placeholder Option 2",
+        a3: "Placeholder Option 3",
+        a4: "Placeholder Option 4"
+    }
+}
+
 
 // 1. create a page that describes the quiz with a start button (card-1)
 // - start button leads to quiz (card-2)
@@ -23,7 +73,8 @@ startButton.addEventListener("click",function(){
     setInterval(function(){
         timer--;
         countDown.innerText=timer;
-        if(timer === 0){
+        // changed if statement parameter from (timer === 0) to (timer <= 0) to account for if user goes into the negatives by getting an incorrect statement with less than 10 seconds left.
+        if(timer <= 0){
             clearInterval();
             document.querySelector(".card-2").style.display="none";
             document.querySelector(".card-3").style.display="block";
@@ -109,20 +160,26 @@ answers.addEventListener("click",function(event){
     console.log(event) 
     // need to see target data
      if(event.target === answerButton1 && questionBox.innerText === question1.question){
-    message.innerText = "Correct!"
+        message.innerText = "Correct!";
+        playerScore += 20;
     } else if (event.target === answerButton2 && questionBox.innerText === question2.question){
-        message.innerText = "Correct!"
+        message.innerText = "Correct!";
+        playerScore += 20;
     } else if (event.target === answerButton3 && questionBox.innerText === question3.question){
-        message.innerText = "Correct!"
+        message.innerText = "Correct!";
+        playerScore += 20;
     } else if (event.target === answerButton4 && questionBox.innerText === question4.question){
-        message.innerText = "Correct!"
+        message.innerText = "Correct!";
+        playerScore += 20;
     } else if (event.target === answerButton1 && questionBox.innerText === question5.question){
-        message.innerText = "Correct!"
+        message.innerText = "Correct!";
+        playerScore += 20;
     } else {
         message.innerText = "Incorrect";
         timer -= 10;
     }
     nextQuestion();
+    scoreDisplayed.innerText = playerScore;
 // PROBLEM: it switches to question 2 but then goes back to question 1
     // Reason: Had startQuiz function inside the setInterval on the start button, so it was automatically resetting every 1 sec
 })
@@ -141,52 +198,9 @@ answers.addEventListener("click",function(event){
 //     nextQuestion();
 // })
 
-// created question objects to call from
-var question1 = {
-    question: "Placeholder question 1",
-    answerOption: {
-        a1: "Placeholder Option 1",
-        a2: "Placeholder Option 2",
-        a3: "Placeholder Option 3",
-        a4: "Placeholder Option 4"
-    }
-}
-var question2 = {
-    question: "Placeholder question 2",
-    answerOption: {
-        a1: "Placeholder Option 1",
-        a2: "Placeholder Option 2",
-        a3: "Placeholder Option 3",
-        a4: "Placeholder Option 4"
-    }
-}
-var question3 = {
-    question: "Placeholder question 3",
-    answerOption: {
-        a1: "Placeholder Option 1",
-        a2: "Placeholder Option 2",
-        a3: "Placeholder Option 3",
-        a4: "Placeholder Option 4"
-    }
-}
-var question4 = {
-    question: "Placeholder question 4",
-    answerOption: {
-        a1: "Placeholder Option 1",
-        a2: "Placeholder Option 2",
-        a3: "Placeholder Option 3",
-        a4: "Placeholder Option 4"
-    }
-}
-var question5 = {
-    question: "Placeholder question 5",
-    answerOption: {
-        a1: "Placeholder Option 1",
-        a2: "Placeholder Option 2",
-        a3: "Placeholder Option 3",
-        a4: "Placeholder Option 4"
-    }
-}
-
 // 4. present user with score and option to submit score with intials
-// - if user chooses to, move to highscore page
+// - if user chooses to, move to highscore page (card-4)
+// function for determining score
+function finalScore (){
+
+}
