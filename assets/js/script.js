@@ -95,33 +95,43 @@ function nextQuestion(){
         setTimeout(function(){
             message.innerText = "";
             fifthQuestion();
-            },"1000")}}
+            },"1000")
+    } else if (questionBox.innerText === question5.question){
+        setTimeout(function(){
+            message.innerText = "";
+            // Need to go to last page (card 3) if last question is answered
+            document.querySelector(".card-2").style.display="none";
+            document.querySelector(".card-3").style.display="block";
+            },"1000")
+    }}
 
 answers.addEventListener("click",function(event){
     console.log(event) 
     // need to see target data
-    while(questionBox.innerText === question1.question){
-    if(event.target === answerButton1){
+     if(event.target === answerButton1 && questionBox.innerText === question1.question){
     message.innerText = "Correct!"
-    } else if(event.target === answerButton2 || answerButton3 || answerButton4){
+    } else if (event.target === answerButton2 && questionBox.innerText === question2.question){
+        message.innerText = "Correct!"
+    } else if (event.target === answerButton3 && questionBox.innerText === question3.question){
+        message.innerText = "Correct!"
+    } else if (event.target === answerButton4 && questionBox.innerText === question4.question){
+        message.innerText = "Correct!"
+    } else if (event.target === answerButton1 && questionBox.innerText === question5.question){
+        message.innerText = "Correct!"
+    } else {
         message.innerText = "Incorrect";
         timer -= 10;
-    }}
-    // while(questionBox.innerText === question2.question){
-    // if(event.target === answerButton2){
-    //     message.innerText = "Correct!"
-    //     } else if(event.target === answerButton1 || answerButton3 || answerButton4){
-    //         message.innerText = "Incorrect";
-    //         timer -= 10;
-    //     }}
-    // need to go to next question
+    }
     nextQuestion();
 // PROBLEM: it switches to question 2 but then goes back to question 1
     // Reason: Had startQuiz function inside the setInterval on the start button, so it was automatically resetting every 1 sec
 })
 
 // answers.addEventListener("click",function(event){
+
     // PROBLEM: while this event click is active the previous event click is somehow removed; when I click any button on question 1 I get the incorrect message, but when I click the correct button on question 2 I get the correct message; telling me that this event click is overwriting the previous
+    // *SOLVED by putting the click event code into the if statement in the previous click event
+
 //     if(event.target === answerButton2 && questionBox.innerText === question2.question){
 //     message.innerText = "Correct!"
 //     } else if(event.target === answerButton1 || answerButton3 || answerButton4){
