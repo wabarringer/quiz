@@ -229,6 +229,7 @@ var savedScores = []
     
 // // TODO: need to include the user's initials they submit in text area on the final card
 // })
+
 submitButton.addEventListener("click", function(event){
     event.preventDefault;
     // move to card 4
@@ -249,7 +250,8 @@ submitButton.addEventListener("click", function(event){
 // TODO: need to include the user's initials they submit in text area on the final card
 })
 
-
+// reviewed activity 26 from unit 1 web API 
+// It helped with understanding the need to use local storage effectively
 function storedList () {
     localStorage.setItem("savedScores", JSON.stringify(savedScores));
 }
@@ -271,7 +273,7 @@ function run() {
         savedScores = storedStuff
     }
 }
-
+// running on page load so that scores are updated
 run()
 
 
