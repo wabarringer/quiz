@@ -14,8 +14,8 @@ var scoreDisplayed = document.querySelector("#player-score")
 var submitButton = document.querySelector("#submitButton")
 var initialField = document.querySelector("#initialField")
 var highscoreList = document.querySelector("#highscore-list")
-var li = document.createElement("li")
-var storedScores = []
+
+
 
 // created question objects to call from
 var question1 = {
@@ -69,8 +69,10 @@ var question5 = {
 // - start button leads to quiz (card-2)
 
 startButton.addEventListener("click",function(){
-    // remove the welcome page
+    // add previous data to stored scores and initials
     storedScores = localStorage.getItem("score");
+    storedInitials = localStorage.getItem("initials");
+    // remove the welcome page
     document.querySelector(".card-1").style.display="none";
     // display quiz
     document.querySelector(".card-2").style.display="flex";
@@ -83,8 +85,8 @@ startButton.addEventListener("click",function(){
         if(timer <= 0){
             clearInterval();
             document.querySelector(".card-2").style.display="none";
-            document.querySelector(".card-3").style.display="block";
-        };
+            document.querySelector(".card-3").style.display="flex";
+        } ;
     },"1000")
     setTimeout(function(){
     startQuiz();
@@ -159,8 +161,8 @@ function nextQuestion(){
             // Need to go to last page (card 3) if last question is answered
             document.querySelector(".card-2").style.display="none";
             document.querySelector(".card-3").style.display="flex";
+            clearInterval;
             },"1000")
-        timer = 0;
     }}
 
 answers.addEventListener("click",function(event){
@@ -194,36 +196,82 @@ answers.addEventListener("click",function(event){
 
 
 // answers.addEventListener("click",function(event){
-
-    // PROBLEM: while this event click is active the previous event click is somehow removed; when I click any button on question 1 I get the incorrect message, but when I click the correct button on question 2 I get the correct message; telling me that this event click is overwriting the previous
-    // *SOLVED by putting the click event code into the if statement in the previous click event
-
-//     if(event.target === answerButton2 && questionBox.innerText === question2.question){
-//     message.innerText = "Correct!"
-//     } else if(event.target === answerButton1 || answerButton3 || answerButton4){
-//         message.innerText = "Incorrect";
-//         timer -= 10;
-//     }
-//     nextQuestion();
-// })
+// PROBLEM: while this event click is active the previous event click is somehow removed; when I click any button on question 1 I get the incorrect message, but when I click the correct button on question 2 I get the correct message; telling me that this event click is overwriting the previous
+// *SOLVED by putting the click event code into the if statement in the previous click event
 
 // 4. present user with score and option to submit score with intials
 
 // function for determining score
 // *correction* I didn't need a function; instead added a var for player's score, set to 0 and added to it for each correct answer. Now need to test to make sure it won't add for incorrect answers *successful
 
-// - if user chooses to, move to highscore page (card-4)
+var savedScores = []
 
-// how to log the player's score without it getting updated if they play again? Not sure it will, but still cautious 
+// submitButton.addEventListener("click", function(event){
+//     event.preventDefault;
+//     // move to card 4
+//     document.querySelector(".card-3").style.display="none";
+//     document.querySelector(".card-4").style.display="flex";
+//     // save initials
+//     localStorage.setItem("Initials", initialField.value);
+//     // add list item including intitials + score
+//     var initialsSaved = localStorage.getItem("Initials")
+//     var scoreSaved = localStorage.getItem("score")
+//     var finalizedScore = initialsSaved + " - " + scoreSaved + "%";
 
+//     scoreList.appendChild(document.createTextNode(finalizedScore));
+//     highscoreList.appendChild(scoreList);
+    
+//     savedScores.push(finalizedScore);
+
+//     JSON.parse(localStorage.getItem("savedScores"));
+    
+//     localStorage.setItem("savedScores", JSON.stringify(savedScores));
+    
+// // TODO: need to include the user's initials they submit in text area on the final card
+// })
 submitButton.addEventListener("click", function(event){
     event.preventDefault;
+    // move to card 4
     document.querySelector(".card-3").style.display="none";
     document.querySelector(".card-4").style.display="flex";
-    li.appendChild(document.createTextNode(initialField.value.toUpperCase() + " - " + localStorage.getItem("score") + "%"));  
-    highscoreList.appendChild(li);
-    // for (let i = 0; i < storedScores.length; i++) {
-    //     li.appendChild(document.createTextNode(storedScores[i]))  
-    // }
+    // save initials
+    var initial = initialField.value.trim();
+    var finalizedScore = initial + " - " + playerScore + "%"
+    if (initial === ""){
+        return;
+    };
+
+    savedScores.push(finalizedScore);
+    
+    storedList ()
+    renderList ()
+    
 // TODO: need to include the user's initials they submit in text area on the final card
 })
+
+
+function storedList () {
+    localStorage.setItem("savedScores", JSON.stringify(savedScores));
+}
+
+function renderList () {
+     highscoreList.innerHTML = "";
+     for (let i = 0; i < savedScores.length; i++){
+        var listedScores = savedScores[i];
+        console.log(listedScores);
+        var scoreList = document.createElement("li");
+        scoreList.textContent = listedScores;
+        highscoreList.appendChild(scoreList);
+     }
+}
+
+function run() {
+    var storedStuff = JSON.parse(localStorage.getItem("savedScores")); 
+    if (storedStuff !== null) {
+        savedScores = storedStuff
+    }
+}
+
+run()
+
+
