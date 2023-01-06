@@ -2,16 +2,50 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 5px solid black;
+    width: 50%;
+    height: 50vh;
+    align-items: center;
+}
+
 .card-2 {
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    border: 5px solid black;
+    width: 50%;
+    height: 50vh;
+    align-items: center;
 }
 
 .card-3 {
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    border: 5px solid black;
+    width: 50%;
+    height: 50vh;
+    align-items: center;
 }
 
 .card-4 {
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    border: 5px solid black;
+    width: 50%;
+    height: 50vh;
+    align-items: center;
 }
 
 .quiz-opening {
@@ -20,14 +54,7 @@
     text-align: center;
 }
 
-.answers {
-    display: flex;
-    flex-direction: column;
-    width: 10%;
-}
-
-#start-button {
-    display: flex;
-    justify-content: center;
+#initialField {
+    width: 50px;
 }
 

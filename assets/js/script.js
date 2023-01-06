@@ -11,51 +11,56 @@ var answers = document.querySelector(".answers")
 var message = document.querySelector("#message")
 var playerScore = 0
 var scoreDisplayed = document.querySelector("#player-score")
+var submitButton = document.querySelector("#submitButton")
+var initialField = document.querySelector("#initialField")
+var highscoreList = document.querySelector("#highscore-list")
+var li = document.createElement("li")
+var storedScores = []
 
 // created question objects to call from
 var question1 = {
-    question: "Placeholder question 1",
+    question: "What is Washington's state nickname?",
     answerOption: {
-        a1: "Placeholder Option 1",
-        a2: "Placeholder Option 2",
-        a3: "Placeholder Option 3",
-        a4: "Placeholder Option 4"
+        a1: "The Evergreen State",
+        a2: "The Rainy State",
+        a3: "The Nirvana State",
+        a4: "The Coffee State"
     }
 }
 var question2 = {
-    question: "Placeholder question 2",
+    question: "Washington is the ___ state.",
     answerOption: {
-        a1: "Placeholder Option 1",
-        a2: "Placeholder Option 2",
-        a3: "Placeholder Option 3",
-        a4: "Placeholder Option 4"
+        a1: "39th",
+        a2: "42nd",
+        a3: "50th",
+        a4: "8th"
     }
 }
 var question3 = {
-    question: "Placeholder question 3",
+    question: "What is the capital of Washington?",
     answerOption: {
-        a1: "Placeholder Option 1",
-        a2: "Placeholder Option 2",
-        a3: "Placeholder Option 3",
-        a4: "Placeholder Option 4"
+        a1: "Seattle",
+        a2: "Tacoma",
+        a3: "Olympia",
+        a4: "Yakima"
     }
 }
 var question4 = {
-    question: "Placeholder question 4",
+    question: "What year did Washington gain its statehood?",
     answerOption: {
-        a1: "Placeholder Option 1",
-        a2: "Placeholder Option 2",
-        a3: "Placeholder Option 3",
-        a4: "Placeholder Option 4"
+        a1: "1928",
+        a2: "1808",
+        a3: "2005",
+        a4: "1889"
     }
 }
 var question5 = {
-    question: "Placeholder question 5",
+    question: "What is Washington's state bird?",
     answerOption: {
-        a1: "Placeholder Option 1",
-        a2: "Placeholder Option 2",
-        a3: "Placeholder Option 3",
-        a4: "Placeholder Option 4"
+        a1: "Goldfinch",
+        a2: "American Robin",
+        a3: "Steller's Jay",
+        a4: "Canada Goose"
     }
 }
 
@@ -65,9 +70,10 @@ var question5 = {
 
 startButton.addEventListener("click",function(){
     // remove the welcome page
+    storedScores = localStorage.getItem("score");
     document.querySelector(".card-1").style.display="none";
     // display quiz
-    document.querySelector(".card-2").style.display="block";
+    document.querySelector(".card-2").style.display="flex";
     // 2. present user with a timer that starts counting down and start with the first question
     countDown.innerText = timer;
     setInterval(function(){
@@ -152,8 +158,9 @@ function nextQuestion(){
             message.innerText = "";
             // Need to go to last page (card 3) if last question is answered
             document.querySelector(".card-2").style.display="none";
-            document.querySelector(".card-3").style.display="block";
+            document.querySelector(".card-3").style.display="flex";
             },"1000")
+        timer = 0;
     }}
 
 answers.addEventListener("click",function(event){
@@ -180,9 +187,11 @@ answers.addEventListener("click",function(event){
     }
     nextQuestion();
     scoreDisplayed.innerText = playerScore;
+    localStorage.setItem("score", playerScore)
 // PROBLEM: it switches to question 2 but then goes back to question 1
     // Reason: Had startQuiz function inside the setInterval on the start button, so it was automatically resetting every 1 sec
 })
+
 
 // answers.addEventListener("click",function(event){
 
@@ -199,8 +208,22 @@ answers.addEventListener("click",function(event){
 // })
 
 // 4. present user with score and option to submit score with intials
-// - if user chooses to, move to highscore page (card-4)
-// function for determining score
-function finalScore (){
 
-}
+// function for determining score
+// *correction* I didn't need a function; instead added a var for player's score, set to 0 and added to it for each correct answer. Now need to test to make sure it won't add for incorrect answers *successful
+
+// - if user chooses to, move to highscore page (card-4)
+
+// how to log the player's score without it getting updated if they play again? Not sure it will, but still cautious 
+
+submitButton.addEventListener("click", function(event){
+    event.preventDefault;
+    document.querySelector(".card-3").style.display="none";
+    document.querySelector(".card-4").style.display="flex";
+    li.appendChild(document.createTextNode(initialField.value.toUpperCase() + " - " + localStorage.getItem("score") + "%"));  
+    highscoreList.appendChild(li);
+    // for (let i = 0; i < storedScores.length; i++) {
+    //     li.appendChild(document.createTextNode(storedScores[i]))  
+    // }
+// TODO: need to include the user's initials they submit in text area on the final card
+})
